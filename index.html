@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>Reproductor de youtube</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="css/estilos.css">
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
+</head>
+<body>
+	<div id="main">
+		<div id="menu">
+
+			<div class="ico" id="ico-add" @click="addSearch"></div>
+			<div class="ico" id="ico-sort" @click="ordenarAlfa"></div>
+			
+
+		</div>
+
+		<div id="buscador" class="animated fadeIn">
+			<div v-if="alternar">
+
+			<input type="text" placeholder="Buscar por titulo..." v-model="busqueda">
+
+            </div>
+            <div v-else>
+			<input type="text" placeholder="Añade una URL de Youtube..." v-model="laURL" v-show="!mostrar" v-on:keyup.enter="showTitulo">
+			<input type="text" placeholder="Añade un titulo al video..." id="ttl" v-model="elTitulo" v-show="mostrar" v-on:keyup.enter="addDatos ">
+
+			</div>
+		</div>
+		<div id="listado" class="animated bounceInLeft">
+				<ul>
+					<li  class="animated bounceInLeft" v-for="video in buscarPorTitulo" @click="playVideo(video)" :class="{activo:video.activo}" @contextmenu.prevent="delVideo(video)">
+						<div class="titulo" :title="video.titulo">{{ video.titulo }}</div>
+						
+					</li>
+				</ul>
+		</div>
+		<iframe src="rpd" allow="autoplay" :src="videoActivo"></iframe>
+		
+	</div>
+	
+
+	<script src="js/vue.js"></script>
+	<script src="js/dimensiones.js"></script>
+	
+</body>
+</html>
